@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const crudRoutes = require('./routes/crud');
 
 const app = express();
-const MONGODBURL = "<Your mongodb cluster's url goes here>";
+const MONGODBURL = "mongodb+srv://mca2258:2xToLLTo26dtRxbQ@cluster0.d52tf0m.mongodb.net/?retryWrites=true&w=majority";
 app.use(express.json());
 
 app.use((req, res, next) => {
