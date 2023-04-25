@@ -5,6 +5,7 @@ import Header from './components/Header';
 import AddToDo from './components/AddToDo';
 import Todos from './components/Todos';
 
+const mainLink = 'https://simple-todo-mern-stack-app.vercel.app/';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -19,19 +20,19 @@ function App() {
   }, []);
 
   const fecthTodos = async () => {
-    const res = await fetch('http://localhost:8080/get')
+    const res = await fetch(`${mainLink}get`)
     const data = await res.json();
     return data.todos;
   }
 
   const fetchTodo = async (id) => {
-    const res = await fetch(`http://localhost:8080/get/${id}`)
+    const res = await fetch(`${mainLink}get/${id}`)
     const data = await res.json();
     return data.todo
   }
 
   const addTodo = async (todo) => {
-    const res = await fetch('http://localhost:8080/post', {
+    const res = await fetch(`${mainLink}post`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -46,7 +47,7 @@ function App() {
   }
 
   const removeTodo = async (id) => {
-    const res = await fetch(`http://localhost:8080/delete/${id}`, {
+    const res = await fetch(`${mainLink}delete/${id}`, {
       method: 'DELETE',
     });
 
@@ -59,7 +60,7 @@ function App() {
     const todoToToggle = await fetchTodo(id);
     const updatedTodo = { status: !todoToToggle.status }
 
-    const res = await fetch(`http://localhost:8080/put/${id}`, {
+    const res = await fetch(`${mainLink}put/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
