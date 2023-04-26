@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator/check');
 
 const Todo = require('../models/todo');
+const Mark = require('../models/marks');
 
 exports.getAllTodos = (req, res, next) => {
 
@@ -76,6 +77,42 @@ exports.postTodo = (req, res, next) => {
         });
 };
 
+exports.postMarks = (req, res, next) => {
+
+    const errors = validationResult(req);
+
+    if(! errors.isEmpty()) {
+        const error = new Error('Validation failed, provided data is incorrect.');
+        error.statusCode = 422;
+        next(error);
+    }
+
+    const marks = new Mark({
+        marks : req.body.marks
+    });
+
+    marks.save()
+        .then(todo => {
+            let title;
+            if(todo.marks < 5){
+                title = "Thank you for your response, I does not deserve this Marks, but i will try hard next time"
+            } else{
+                title = "Thank you for your response"
+            }
+
+            res.status(201).json({
+                message: title,
+                marks: { marks: todo.marks, id: todo._id.toString()}
+            });
+        })
+        .catch(err => {
+            if(! err.statusCode) {
+                err.statusCode = 500;
+                next(err);
+            }
+        });
+};
+
 exports.putTodo = (req, res, next) => {
 
     const errors = validationResult(req);
@@ -98,6 +135,9 @@ exports.putTodo = (req, res, next) => {
             }
 
             todo.status = req.body.status;
+            if(req.body.name){
+                todo.name = req.body.name;
+            }
 
             return todo.save();
 

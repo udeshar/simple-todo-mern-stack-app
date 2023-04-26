@@ -1,11 +1,11 @@
 import { Navbar, Container } from 'react-bootstrap';
 
-const Header = () => {
+const Header = ({title, className}) => {
     return (
-        <div>
+        <div className={className}>
             <Navbar bg="light" >
                 <Container className="justify-content-center">
-                <Navbar.Brand>Todo List With REST API</Navbar.Brand>
+                <Navbar.Brand>{title}</Navbar.Brand>
                 </Container>
             </Navbar>
         </div>

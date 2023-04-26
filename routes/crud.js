@@ -21,6 +21,17 @@ router.put('/put/:tid', [
         .isBoolean()
 ], crudController.putTodo);
 
+router.put('/putname/:tid', [
+    body('name', "Provide a valid name")
+    .isLength({ min: 2})
+    .trim(),
+], crudController.putTodo);
+
 router.delete('/delete/:tid', crudController.deleteTodo);
+
+router.post('/givemarks', [
+    body('marks', "Provide a valid marks")
+    .isNumeric()
+], crudController.postMarks);
 
 module.exports = router;

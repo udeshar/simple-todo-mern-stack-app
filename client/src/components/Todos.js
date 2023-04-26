@@ -1,13 +1,14 @@
 import Todo from './Todo';
 import { Card } from 'react-bootstrap';
 
-const Todos = ({ todos, removeTodo, markTodo }) => {
+const Todos = ({ todos, removeTodo, markTodo, update }) => {
   return (
     <div>
           {todos.map(todo => (
-            <Card key={todo.id}>
+            <Card key={todo.id} className="my-3" >
               <Card.Body>
-                <Todo                
+                <Todo            
+                update={update}    
                 todo={todo}
                 markTodo={markTodo}
                 removeTodo={removeTodo}
