@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
+dotenv.config();
 
 const crudRoutes = require('./routes/crud');
 
 const app = express();
+app.use(cors());
 // const MONGODBURL = "mongodb+srv://mca2258:2xToLLTo26dtRxbQ@cluster0.d52tf0m.mongodb.net/?retryWrites=true&w=majority";
-const MONGODBURL = 'mongodb://db:27017/mydatabase'; 
+const MONGODBURL = process.env.MONGODBURL; 
 mongoose.set('strictQuery', false)
 app.use(express.json());
 
@@ -37,6 +41,6 @@ mongoose.connect(MONGODBURL)
         console.log(error);
     });
 
-    app.listen(8080, () => {
-        console.log("running")
-    });
+app.listen(process.env.PORT || 8000, () => {
+    console.log("running on port "+ process.env.PORT)
+});

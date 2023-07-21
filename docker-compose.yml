@@ -6,15 +6,18 @@ services:
                   - 3000:3000
             build: ./client
       be:
-            command: node app.js
+            command: node index.js
             ports:
-                  - 8080:8080
-            build: ./
+                  - 8000:8000
+            build: ./server
+            environment:
+                  - PORT=8000
+                  - MONGODBURL=mongodb://db:27017/mydatabase
       db:
             image: mongo
             ports:
                   - 27017:27017
             volumes:
-                  - merndata:/var/lib
+                  - merndata:/data/db
 volumes:
       merndata:

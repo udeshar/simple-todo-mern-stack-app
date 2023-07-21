@@ -11,7 +11,7 @@ const rating = [
 ]
 
 // const mainLink = 'https://simple-todo-mern-stack-app.vercel.app/';
-const mainLink = 'http://localhost:8080/';
+const mainLink = 'http://localhost:8000/';
 
 function App() {
       const [todos, setTodos] = useState([]);
